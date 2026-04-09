@@ -77,7 +77,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             //3.不一致，报错
             return Result.fail("验证码错误");
         }
-        //一致，根据手机号查询用户
+        // 一致，根据手机号查询用户
         User user = query().eq("phone", phone).one();
 
         //5.判断用户是否存在
@@ -99,7 +99,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         // 7.3 保存到 redis 中
         stringRedisTemplate.opsForHash().putAll(LOGIN_USER_KEY+token, userMap);
         // 有效期
-        stringRedisTemplate.expire(LOGIN_USER_KEY+token, LOGIN_USER_TTL, TimeUnit.MINUTES);
+        stringRedisTemplate.expire(LOGIN_USER_KEY+token, LOGIN_USER_TTL, TimeUnit.SECONDS);
         // 8. 返回token
         return Result.ok(token);
     }
