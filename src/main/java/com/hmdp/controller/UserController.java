@@ -99,5 +99,17 @@ public class UserController {
         return Result.ok(userDTO);
     }
 
+    @PostMapping("/sign")
+    public Result sign(){
+        // 实现签到功能
+        return userService.sign();
+    }
+
+    @GetMapping("/signcount")
+    public Result signCount(){
+        // 查询签到次数
+        return userService.signCount();
+    }
+
 
 }
